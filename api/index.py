@@ -4,14 +4,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "🔥 Number Info API Working Successfully! 🔥"
+    return "Number Info API Working 🔥"
 
 @app.route("/info", methods=["GET"])
 def info():
-    # GET ?num=12345 parameter (optional future use)
-    number = request.args.get("num", "")
-
-    # Static JSON Output (YOUR EXACT DATA)
     data = {
         "success": True,
         "result": [
@@ -38,11 +34,10 @@ def info():
                 "email": ""
             }
         ],
-        "credit": "@BRONX"
+        "credit": "@CodeVortexHere"
     }
 
     return jsonify(data)
 
-# Required for Vercel Python Runtime
 def handler(event, context):
     return app(event, context)
