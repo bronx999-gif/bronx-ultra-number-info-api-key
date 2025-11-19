@@ -1,14 +1,18 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Number Info API Working 🔥"
+    return "🔥 Number Info API Working Successfully! 🔥"
 
 @app.route("/info", methods=["GET"])
 def info():
-    return jsonify({
+    # GET ?num=12345 parameter (optional future use)
+    number = request.args.get("num", "")
+
+    # Static JSON Output (YOUR EXACT DATA)
+    data = {
         "success": True,
         "result": [
             {
@@ -34,10 +38,11 @@ def info():
                 "email": ""
             }
         ],
-        "credit": "@CodeVortexHere"
-    })
+        "credit": "@BRONX"
+    }
 
+    return jsonify(data)
 
-# for vercel serverless
+# Required for Vercel Python Runtime
 def handler(event, context):
     return app(event, context)
